@@ -30,10 +30,13 @@ def predict_price(product_name, product_url, product_type, scaler_path, model_pa
             x_new[col] = x_new[col].astype('category').cat.codes
 
         # scale input
-        xnew_pre = le.fit_transform(x_new)
+        from sklearn.preprocessing import LabelEncoder
+        le=LabelEncoder()
+        for i in x_new.columns:
+            x_new[i] = le.fit_transform(x_new[i])
 
         # prediction
-        pred = model.predict(xnew_pre)
+        pred = model.predict(x_new)
 
         return pred[0]
 
