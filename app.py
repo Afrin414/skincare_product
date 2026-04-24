@@ -6,7 +6,7 @@ import streamlit as st
 def predict_price(product_name, product_url, product_type, scaler_path, model_path):
     try:
         # load scaler
-        with open(scaler_path, 'rb') as file1:
+        with open(encoders_path, 'rb') as file1:
             scaler = pickle.load(file1)
 
         # load model
@@ -30,7 +30,7 @@ def predict_price(product_name, product_url, product_type, scaler_path, model_pa
             x_new[col] = x_new[col].astype('category').cat.codes
 
         # scale input
-        xnew_pre = scaler.transform(x_new)
+        xnew_pre = le.fit_transform(x_new)
 
         # prediction
         pred = model.predict(xnew_pre)
@@ -54,9 +54,9 @@ product_type = st.text_input("Product Type")
 # predict button
 if st.button("Predict Price"):
     
-    scaler_path = 'notebook/scaler.pkl'
+    encoders_path = 'notebook/encoders.pkl'
     model_path = 'notebook/model.pkl'
-    pred = predict_price(product_name, product_url, product_type, scaler_path, model_path)
+    pred = predict_price(product_name, product_url, product_type, encoders_path, model_path)
 
     if pred is not None:
         st.subheader(f"Predicted Price: ₹ {pred:.2f}")
