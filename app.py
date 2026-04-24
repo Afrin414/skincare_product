@@ -54,8 +54,8 @@ product_type = st.text_input("Product Type", "Moisturizer")
 # predict button
 if st.button("Predict Price"):
     
-    scaler_path = 'scaler.pkl'
-    model_path = 'model.pkl'
+    scaler_path = 'notebook/scaler.pkl'
+    model_path = 'notebook/model.pkl'
     pred = predict_price(product_name, product_url, product_type, scaler_path, model_path)
 
     if pred is not None:
