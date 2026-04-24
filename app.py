@@ -47,9 +47,9 @@ def predict_price(product_name, product_url, product_type, scaler_path, model_pa
 st.title("Skincare Product Price Predictor")
 
 # input fields
-product_name = st.text_input("Product Name", "Face Cream")
-product_url = st.text_input("Product URL", "example.com/product")
-product_type = st.text_input("Product Type", "Moisturizer")
+product_name = st.text_input("Product Name")
+product_url = st.text_input("Product URL")
+product_type = st.text_input("Product Type")
 
 # predict button
 if st.button("Predict Price"):
